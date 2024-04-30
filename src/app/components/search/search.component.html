@@ -1,0 +1,20 @@
+<section id="search">
+  <form class="search-form">
+    <mat-form-field class="search-full-width">
+      <mat-label>Codigo de Barras</mat-label>
+      <input
+        type="text"
+        placeholder="Ex: 789123456789"
+        aria-label="Digite o Codigo de Barras"
+        matInput
+        [formControl]="myControl"
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete #auto="matAutocomplete">
+        @for (option of filteredOptions | async; track option) {
+        <mat-option [value]="option">{{ option }}</mat-option>
+        }
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+</section>
