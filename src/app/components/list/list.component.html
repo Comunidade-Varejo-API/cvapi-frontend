@@ -1,0 +1,22 @@
+<mat-card>
+  <mat-card-title>Produto: {{ selectedItem }}</mat-card-title>
+
+  <mat-accordion class="list-headers-align" multi>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Descrição: </mat-panel-title>
+        @for (item of produto | async; track item.DESCRICAO ) {
+        <mat-panel-description>
+          {{ item.DESCRICAO }}
+          <mat-icon>edit</mat-icon>
+        </mat-panel-description>
+        }
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <mat-label>Nova Descrição</mat-label>
+        <input matInput />
+      </mat-form-field>
+    </mat-expansion-panel>
+  </mat-accordion>
+</mat-card>

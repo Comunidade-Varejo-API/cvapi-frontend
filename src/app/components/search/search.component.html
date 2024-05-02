@@ -1,4 +1,5 @@
 <section id="search">
+  <h1 class="search-title">Procure as informações do seu produto</h1>
   <form class="search-form">
     <mat-form-field class="search-full-width">
       <mat-label>Codigo de Barras</mat-label>
@@ -11,10 +12,15 @@
         [matAutocomplete]="auto"
       />
       <mat-autocomplete #auto="matAutocomplete">
-        @for (option of filteredOptions | async; track option) {
-        <mat-option [value]="option">{{ option }}</mat-option>
+        @for (option of filteredOptions | async; track $index) {
+        <mat-option
+          [value]="option"
+          (onSelectionChange)="onSelectItem($event)"
+          >{{ option }}</mat-option
+        >
         }
       </mat-autocomplete>
     </mat-form-field>
   </form>
 </section>
+<app-list [selectedItem]="selectedItem"></app-list>

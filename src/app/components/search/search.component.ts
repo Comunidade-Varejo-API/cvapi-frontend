@@ -9,12 +9,15 @@ import { debounceTime, filter, map, startWith } from 'rxjs/operators';
 import { AsyncPipe } from '@angular/common';
 import { ProdutosService } from '../../services/produtos.service';
 import { Infoprod } from '../../interfaces/infoprod';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { ListComponent } from '../list/list.component';
+import { MatOptionSelectionChange } from '@angular/material/core';
 
 @Component({
   selector: 'app-search',
   standalone: true,
   imports: [
+    ListComponent,
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -27,6 +30,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   styleUrl: './search.component.scss',
 })
 export class SearchComponent implements OnInit {
+  selectedItem!: number;
+  onSelectItem($event: MatOptionSelectionChange<number>) {
+    this.selectedItem = $event.source.value;
+  }
   filteredOptions!: Observable<number[]>;
   myControl = new FormControl('');
   products: Observable<Infoprod[]> = new Observable<Infoprod[]>();
@@ -38,7 +45,7 @@ export class SearchComponent implements OnInit {
       .pipe(
         startWith(''),
         debounceTime(300), // Wait for 300 milliseconds after the user stops typing
-        map((value) => (value ? value.trim() : '')), // Trim the input value
+        map((value) => (value ? value : '')), // Trim the input value
         filter((value) => value.length >= 4) // Filter out values with less than 4 digits
       )
       .subscribe((value) => {
@@ -54,10 +61,10 @@ export class SearchComponent implements OnInit {
       });
   }
   private _filter(value: string): number[] {
-    const filterValue = value.toLowerCase();
+    const filterValue = value;
     return this.options
       .filter((option) => option.toString().toLowerCase().includes(filterValue))
-      .map((option) => option.id); // Assuming each Infoprod object has an 'id' property of type number
+      .map((option) => option.id);
   }
 
   async fetchProduct(): Promise<Infoprod[]> {
