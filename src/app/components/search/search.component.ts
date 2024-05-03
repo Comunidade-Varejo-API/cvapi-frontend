@@ -1,10 +1,10 @@
-import { Component, Inject, OnInit, inject } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
-import { Observable, firstValueFrom } from 'rxjs';
+import { Observable, firstValueFrom, of } from 'rxjs';
 import { debounceTime, filter, map, startWith } from 'rxjs/operators';
 import { AsyncPipe } from '@angular/common';
 import { ProdutosService } from '../../services/produtos.service';
@@ -30,10 +30,27 @@ import { MatOptionSelectionChange } from '@angular/material/core';
   styleUrl: './search.component.scss',
 })
 export class SearchComponent implements OnInit {
-  selectedItem!: number;
-  onSelectItem($event: MatOptionSelectionChange<number>) {
-    this.selectedItem = $event.source.value;
+  @ViewChild(ListComponent) listComponent!: ListComponent;
+
+  // selectedItem!: number;
+  async onSelectItem($event: MatOptionSelectionChange<number>) {
+    console.log('onSelectItem', $event);
+    this.infoProdService
+      .getProduto($event.source.value.toString())
+      .subscribe({
+        next: (product: any) => {
+          this.listComponent.produto = product;
+        },
+        error: (error: any) => {
+          console.error(error);
+        },
+        complete: () => {
+          console.log('Observable completo');
+        }
+      });
+    console.log(this.listComponent.produto);
   }
+
   filteredOptions!: Observable<number[]>;
   myControl = new FormControl('');
   products: Observable<Infoprod[]> = new Observable<Infoprod[]>();
