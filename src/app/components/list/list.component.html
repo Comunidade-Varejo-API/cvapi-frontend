@@ -1,20 +1,55 @@
 <mat-card>
   <mat-card-title>Produto:</mat-card-title>
-
   <mat-accordion class="list-headers-align" multi>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title> Descrição: </mat-panel-title>
-       
-        <mat-panel-description >
+        <mat-panel-description>
           {{ produto.DESCRICAO }}
           <mat-icon>edit</mat-icon>
         </mat-panel-description>
-      
       </mat-expansion-panel-header>
-
-      <mat-form-field>
+      <mat-form-field class="formField">
         <mat-label>Nova Descrição</mat-label>
+        <input class="matInput" matInput />
+      </mat-form-field>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> NCM COD: </mat-panel-title>
+        <mat-panel-description>
+          {{ produto.NCM_COD }}
+          <mat-icon>edit</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field class="formField">
+        <mat-label>Novo NCM COD:</mat-label>
+        <input matInput />
+      </mat-form-field>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> NCM: </mat-panel-title>
+        <mat-panel-description>
+          {{ produto.NCM }}
+          <mat-icon>edit</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field class="formField">
+        <mat-label>Novo NCM</mat-label>
+        <input matInput />
+      </mat-form-field>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> CST: </mat-panel-title>
+        <mat-panel-description>
+          {{ produto.CST }}
+          <mat-icon>edit</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field class="formField">
+        <mat-label>Novo CST</mat-label>
         <input matInput />
       </mat-form-field>
     </mat-expansion-panel>
