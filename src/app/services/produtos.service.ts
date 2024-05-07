@@ -7,10 +7,11 @@ import { Observable } from 'rxjs';
 })
 export class ProdutosService {
   private apiUrl = 'https://infoprodapi.vercel.app';
+  // private apiUrl = 'http://localhost:8080/api';
   constructor(@Inject(HttpClient) private http: HttpClient) {}
 
   getProdutos() {
-    return this.http.get<Array<Infoprod>>(this.apiUrl + '/produto/');
+    return this.http.get<Array<Infoprod>>(this.apiUrl + '/produtos/');
   }
   getProduto(id: string | null) {
     const url = `${this.apiUrl}/produto/${id}`;

@@ -9,6 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { Infoprod } from '../../interfaces/infoprod';
 import { Observable, of } from 'rxjs';
 import { AsyncPipe, NgFor } from '@angular/common';
+import { MatButton } from '@angular/material/button';
 @Component({
   selector: 'app-list',
   standalone: true,
@@ -19,6 +20,7 @@ import { AsyncPipe, NgFor } from '@angular/common';
     MatExpansionModule,
     MatIconModule,
     MatInputModule,
+    MatButton,
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
